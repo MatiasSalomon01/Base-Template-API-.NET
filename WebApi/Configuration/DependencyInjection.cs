@@ -1,5 +1,6 @@
 ﻿using Application;
 using Infrastructure;
+using Microsoft.AspNetCore.Mvc;
 using WebApi.Configuration.ExceptionHandlers;
 using WebApi.Configuration.Swagger;
 using WebApi.Filters;
@@ -17,6 +18,8 @@ public static class DependencyInjection
             .AddExceptionHandler<ExceptionHandler>()
             .AddProblemDetails()
             .AddControllers(x => x.Filters.Add(typeof(PaginatedOptionsActionFilter)));
+
+        services.Configure<JsonOptions>(x => x.JsonSerializerOptions.Converters.Add(new UtcToLocalDateTimeConverter()));
 
         return services;
     }

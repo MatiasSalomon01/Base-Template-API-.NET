@@ -32,7 +32,8 @@ public static class DependencyInjection
         services.AddDbContext<ApplicationDbContext>((provider, builder) =>
         {
             builder.AddInterceptors(provider.GetServices<ISaveChangesInterceptor>());
-            builder.UseSqlite(configuration.GetConnectionString("Database"));
+            //builder.UseSqlite(configuration.GetConnectionString("SQLite"));
+            builder.UseNpgsql(configuration.GetConnectionString("PostgreSQL"));
         });
 
         services.AddScoped<DbContext>(provider => provider.GetRequiredService<ApplicationDbContext>());

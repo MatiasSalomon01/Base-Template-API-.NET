@@ -351,7 +351,7 @@ public static class QueryableExtension
 
     public static IQueryable<T> ApplyPagination<T>(this IQueryable<T> query, IPaginated request) where T : class
     {
-        return query.Skip(request.PageNumber - 1 * request.PageSize).Take(request.PageSize);
+        return query.Skip((request.PageNumber - 1) * request.PageSize).Take(request.PageSize);
     }
 
     public static PaginatedResult<T> ToPaginated<T>(this IEnumerable<T> list, int count, IPaginated paginated, bool hasNext = false, bool hasPrevious = false)
